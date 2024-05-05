@@ -1,11 +1,12 @@
-# Ex-11-IMPLEMENTATION-OF-CALCULATOR-USING-LEX-AND-YACC-
+~~~
+ Ex-11-IMPLEMENTATION-OF-CALCULATOR-USING-LEX-AND-YACC-
 IMPLEMENTATION OF CALCULATOR USING LEX AND YACC 
-# Date :5.04.2024
+ Date :5.04.2024
 
-# Aim :
+ Aim :
 To implement a calculator using LEX and YACC.
 
-# ALGORITHM
+ ALGORITHM
 1. Start the program.
 2. Write a program in the vi editor and save it with .l extension.
 3. In the lex program, write the translation rules for the various mathematical functions.
@@ -15,9 +16,9 @@ To implement a calculator using LEX and YACC.
 7. Compile these with the C compiler as gcc lex.yy.c y.tab.c
 8. Enter an expression as input and it is evaluated and the answer is displayed as output.
 
-# PROGRAM
-## Program: calculator.l file
-~~~
+ PROGRAM
+ Program: calculator.l file
+
 %{
 #include"y.tab.h"
 #include<math.h>
@@ -39,13 +40,10 @@ mem {return MEM;}
 \$ return 0;
 \n|. return yytext[0];
 %%
-~~~
-## Program: calculator.y file
-~~~
+ Program: calculator.y file
 %{
 double memvar;
 %}
-
 %union { double dval; }
 
 %token <dval> NUMBER
@@ -58,17 +56,12 @@ double memvar;
 
 %nonassoc UMINUS
 %type <dval> expression
-
-%%
-
 start: statement '\n'
 | start statement '\n'
 ;
-
 statement: MEM '=' expression { memvar = $3; }
 | expression { printf("Answer=%g\n", $1); }
 ;
-
 expression: expression '+' expression {$$ = $1 + $3; }
 | expression '-' expression {$$ = $1 - $3; }
 | expression '*' expression {$$ = $1 * $3; }
@@ -90,9 +83,6 @@ expression: '-' expression %prec UMINUS {$$ = -$2; }
 | NUMBER {$$ = $1; }
 | MEM {$$ = memvar; }
 ;
-
-%%
-
 int main() {
 printf("Enter the expression: ");
 yyparse();
@@ -107,7 +97,6 @@ return 0;
 
 # OUTPUT
 ![image](https://github.com/niranjanadevi-s/Ex-11-IMPLEMENTATION-OF-CALCULATOR-USING-LEX-AND-YACC-/assets/141748873/6246952e-6183-4cc4-b481-7710430011b1)
-
 
 # RESULT
 The calculator is implemented using LEX and YACC and the output is verified.
